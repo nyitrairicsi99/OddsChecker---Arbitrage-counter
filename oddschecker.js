@@ -124,6 +124,7 @@
             } else {
                 buttons[i].style.color = "red"
                 buttons[i].style.fontWeight = "100";
+                buttons[i].style.opacity = "0";
             }
         }
         maxElement.style.fontWeight = "900";
@@ -182,6 +183,7 @@
             } else {
                 buttons[i].style.color = "red"
                 buttons[i].style.fontWeight = "100";
+                buttons[i].style.opacity = "0";
             }
         }
         maxElement.style.fontWeight = "900";
