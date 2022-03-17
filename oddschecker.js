@@ -10,37 +10,8 @@
 // ==/UserScript==
 
 (function() {
-    let ignoreSites = [
-        false, //bet365
-        false, //skybet
-        false, //paddypower
-        false, //williamhill
-        false, //888sport
-        false, //betfair
-        false, //betvictor
-        false, //coral
-        false, //unibet
-        false, //mansionbet
-        false, //betfred
-        false, //sbk
-        false, //boylesports
-        false, //10bet
-        false, //sportnation
-        false, //sportingindex
-        false, //spreadex
-        false, //quinnbet
-        false, //betway
-        false, //ladbrokers
-        false, //parimatch
-        false, //vbet
-        false, //betfair
-        false, //smartbet
-        false, //matchbook
-    ]
     function logEvent(key,winrate) {
         let notbar = document.getElementById("notbar");
-
-
         if (notbar==undefined) {
             let div = document.createElement("div");
             div.id = "notbar";
@@ -102,29 +73,24 @@
         let maxOdds = 0
         let maxElement
         for (let i = 0;i<buttons.length;i++) {
-            if (!ignoreSites[i]){
-                let inner = buttons[i].innerHTML.split('/');
-                if (inner.length>1) {
-                    let n1 = parseInt(inner[0]);
-                    let n2 = parseInt(inner[1]);
-                    let odds = 1 + n1/n2;
-                    buttons[i].innerHTML = Math.round(odds * 100) / 100
-                    if (odds>maxOdds) {
-                        maxOdds = odds
-                        maxElement = buttons[i]
-                    }
-                } else {
-                    let odds = parseFloat(buttons[i].innerHTML)
-                    if (odds>maxOdds) {
-                        maxOdds = odds
-                        maxElement = buttons[i]
-                    }
+            let inner = buttons[i].innerHTML.split('/');
+            if (inner.length>1) {
+                let n1 = parseInt(inner[0]);
+                let n2 = parseInt(inner[1]);
+                let odds = 1 + n1/n2;
+                buttons[i].innerHTML = Math.round(odds * 100) / 100
+                if (odds>maxOdds) {
+                    maxOdds = odds
+                    maxElement = buttons[i]
                 }
-                buttons[i].style.fontWeight = "600";
             } else {
-                buttons[i].style.color = "red"
-                buttons[i].style.fontWeight = "100";
+                let odds = parseFloat(buttons[i].innerHTML)
+                if (odds>maxOdds) {
+                    maxOdds = odds
+                    maxElement = buttons[i]
+                }
             }
+            buttons[i].style.fontWeight = "600";
         }
         maxElement.style.fontWeight = "900";
         return maxOdds
@@ -133,7 +99,6 @@
     function scanSiteFootBall(){
         let divs = document.getElementsByTagName("div");
         let parents = {}
-        let siteindex = 0
         for(let i = 0;i<divs.length;i++) {
             if (divs[i].className.includes("oddsAreaWrapper")){
                 let max = processRowFootBall(divs[i])
@@ -160,29 +125,24 @@
         let maxOdds = 0
         let maxElement
         for (let i = 0;i<buttons.length;i++) {
-            if (!ignoreSites[i]){
-                let inner = buttons[i].innerHTML.split('/');
-                if (inner.length>1) {
-                    let n1 = parseInt(inner[0]);
-                    let n2 = parseInt(inner[1]);
-                    let odds = 1 + n1/n2;
-                    buttons[i].innerHTML = Math.round(odds * 100) / 100
-                    if (odds>maxOdds) {
-                        maxOdds = odds
-                        maxElement = buttons[i]
-                    }
-                } else {
-                    let odds = parseFloat(buttons[i].innerHTML)
-                    if (odds>maxOdds) {
-                        maxOdds = odds
-                        maxElement = buttons[i]
-                    }
+            let inner = buttons[i].innerHTML.split('/');
+            if (inner.length>1) {
+                let n1 = parseInt(inner[0]);
+                let n2 = parseInt(inner[1]);
+                let odds = 1 + n1/n2;
+                buttons[i].innerHTML = Math.round(odds * 100) / 100
+                if (odds>maxOdds) {
+                    maxOdds = odds
+                    maxElement = buttons[i]
                 }
-                buttons[i].style.fontWeight = "600";
             } else {
-                buttons[i].style.color = "red"
-                buttons[i].style.fontWeight = "100";
+                let odds = parseFloat(buttons[i].innerHTML)
+                if (odds>maxOdds) {
+                    maxOdds = odds
+                    maxElement = buttons[i]
+                }
             }
+            buttons[i].style.fontWeight = "600";
         }
         maxElement.style.fontWeight = "900";
         return maxOdds
